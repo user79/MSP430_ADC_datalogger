@@ -46,7 +46,7 @@ void main(void)
   {
 	  // get ADC sample  (assumes that the event loop below is MUCH slower than this ADC conversion)
 	  ADC10CTL0 |= ENC + ADC10SC;                // Sampling and conversion start
-	  LPM0;           							 // begin LPM0 here (ADC10_ISR will exit LPM0 and resume below after conversion has finished)
+	  LPM0;           			     // begin LPM0 here (ADC10_ISR will exit LPM0 and resume below after conversion has finished)
 	  newADCReading = (ADC10MEM >> 2);           // currently only using 8 bits?
 
 	  //  convert newADCReading into the ASCII decimal number, then TX to computer via RS232
@@ -67,8 +67,8 @@ __interrupt void USCI0TX_ISR(void)
   UCA0TXBUF = digits[digitIndex++];         // begin sending the next digit, and then increment the index
   if (digitIndex >= 5)
   {
-	  IE2 &= ~UCA0TXIE;                     // turn off TX interrupts
-	  digitIndex = 0;                       // reset to beginning
+	  IE2 &= ~UCA0TXIE;                 // turn off TX interrupts
+	  digitIndex = 0;                   // reset to beginning
   }
 }
 
@@ -81,6 +81,6 @@ __interrupt void ADC10_ISR(void)
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void ta0_isr(void)
 {
-  TACTL = 0;								// stop timer
+  TACTL = 0;				   // stop timer
   LPM0_EXIT;
 }
