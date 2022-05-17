@@ -1,4 +1,5 @@
 // Simple datalogger example, continuously ADC sending RS232 data (9600baud) at 100 samples/sec
+// Written by Tim Gilmour, based on Texas Instruments demo code
 
 #include "msp430g2553.h"
 
@@ -20,8 +21,8 @@ void main(void)
   DCOCTL = 0;                               // Select lowest DCOx and MODx settings
   BCSCTL1 = CALBC1_1MHZ;                    // Set DCO calibration
   DCOCTL = CALDCO_1MHZ;
-  P1SEL = BIT2;                     		// P1.2=TXD
-  P1SEL2 = BIT2;                    		// P1.2=TXD
+  P1SEL = BIT2;                     	    // P1.2=TXD
+  P1SEL2 = BIT2;                    	    // P1.2=TXD
   UCA0CTL1 |= UCSSEL_2;                     // SMCLK
   UCA0BR0 = 104;                            // 1MHz 9600
   UCA0BR1 = 0;                              // 1MHz 9600
